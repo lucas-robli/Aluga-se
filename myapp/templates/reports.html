@@ -87,9 +87,9 @@
             <tr>
                 <td scope="row">{{immobile.id}}</td>
 
-                <td scope="row">{% for location in immobile.reg_location.all %}{{location.dt_start|date:"d/m/Y"}}{% endfor %}</td>
-                <td scope="row">{% for location in immobile.reg_location.all %}{{location.dt_end|date:"d/m/Y"}}{% endfor %}</td>
-                <td scope="row">{% for location in immobile.reg_location.all %}{{location.client}}{% endfor %}</td>
+                <td scope="row">{% for location in immobile.reg_location.all %} {{location.dt_start |date:"d/m/Y"}}{% endfor %}</td>
+                <td scope="row">{% for location in immobile.reg_location.all %} {{location.dt_end |date:"d/m/Y"}}{% endfor %}</td>
+                <td scope="row">{% for location in immobile.reg_location.all %} {{location.client}}{% endfor %}</td>
 
                 <td scope="row">{{immobile.code}}</td>
                 <td scope="row">{{immobile.type_item}}</td>

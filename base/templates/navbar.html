@@ -15,6 +15,7 @@
     <a class="navbar-brand" href="#">Aluga-me</a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      {% if user.is_authenticated %}
       <ul class="navbar-nav gap-3 mb-2 mb-lg-0 mx-auto">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Inicio</a>
@@ -52,7 +53,13 @@
         </li>
       </ul>
 
-      <a class="navbar-brand" href="#">@lucasrobli</a>
+      <a class="navbar-brand" href="{% url 'logout' %}">Sair</a>
+
+      {% else %}
+      <div class="d-flex flex-row-reverse">
+        <a class="navbar-brand " href="{% url 'login' %}">Login</a>
+      </div>
+      {% endif %}
     </div>
   </div>
 </nav>

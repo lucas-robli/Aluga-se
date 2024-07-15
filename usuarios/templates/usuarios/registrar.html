@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Cadastrar Cliente{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 30px;">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center">Novo Usuário</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in formulario %}
+                <div class="form-group mt-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field|add_class:"form-control" }}
+                    {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% if field.errors %}
+                    <div class="invalid-feedback">
+                        {{ field.errors }}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="text-center mt-3">
+                    <button class="btn btn-success w-75" type="submit">Cadastrar</button>
+                </div>
+                <div class="text-center mt-3">
+                    <a href="/login">Já possui uma conta? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,15 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Immobile, ImmobileImage
 from .forms import ClientForm, ImmobileForm, RegisterLocationForm
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def list_location(request):
     immobiles = Immobile.objects.filter(is_locate=False)
     context = {'immobiles': immobiles}
     print(context)
     return render(request, 'list-location.html', context)
 
-
+@login_required
 def form_client(request):
     form = ClientForm()
     if request.method == 'POST':
@@ -19,6 +21,7 @@ def form_client(request):
             return redirect('list-location')
     return render(request, 'form-client.html', {'form': form})
 
+@login_required
 def form_immobile(request):
     form = ImmobileForm()
     if request.method == 'POST':
@@ -35,28 +38,31 @@ def form_immobile(request):
             return redirect('list-location')
     return render(request, 'form-immobile.html', {'form': form})
 
-def edit_immobile(request, id):
-    immobile = Immobile.objects.get(id=id)
-    print(immobile)
+@login_required
+def update_immobile(request, id):
+    immobile = get_object_or_404(Immobile, pk=id)
     
-    if request.method == 'GET':
-        form = ImmobileForm(instance=immobile)
-        return render(request, 'form-immobile.html', {'form': form})
-    
-    else:
+    if request.method == 'POST':
         form = ImmobileForm(request.POST, request.FILES, instance=immobile)
         if form.is_valid():
             immobile = form.save()
-            files = request.FILES.getlist('immobile') ## pega todas as imagens
+
+            # Adiciona novas imagens sem excluir as existentes
+            files = request.FILES.getlist('immobile')
             if files:
                 for f in files:
-                    ImmobileImage.objects.create( #cria instance para imagens
+                    ImmobileImage.objects.create(
                         immobile=immobile,
                         image=f
                     )
+
             return redirect('list-location')
+    else:
+        form = ImmobileForm(instance=immobile)
 
+    return render(request, 'form-immobile.html', {'form': form, 'immobile': immobile})
 
+@login_required
 def form_location(request, id):
     get_locate = Immobile.objects.get(id=id) ## pega objeto
 
@@ -80,6 +86,7 @@ def form_location(request, id):
 
 
 ## Relatorio
+@login_required
 def reports(request):
     immobiles = Immobile.objects.all()
     get_locate = request.GET.get('is_locate')
@@ -100,4 +107,7 @@ def reports(request):
     
         
     return render(request, 'reports.html', {'immobiles': immobiles})
+
+def handler404(request, exception):
+    return render(request, '404.html')
         
