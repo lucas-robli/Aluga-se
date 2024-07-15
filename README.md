@@ -11,10 +11,11 @@ Telas:
     Cadastro Clientes;
     Cadastro de Locação;
     Relátorios;
+    Login;
+    Cadastro de Usuários
 
 Este projeto foi desenvolvido em Django.
 
 Trabalhos Futuros: 
-    Criação de tela de Login;
-    Permissões para visualizar e alterar;
-    Melhorias no FrontEnd;
+    Criação de testes unitários;
+    
