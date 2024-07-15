@@ -11,6 +11,8 @@ Telas:
     Cadastro Clientes;
     Cadastro de Locação;
     Relátorios;
+    Login;
+    Cadastro de Usuários
 
 Este projeto foi desenvolvido em Django.
 
