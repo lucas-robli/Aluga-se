@@ -8,7 +8,6 @@ from django.contrib.auth.decorators import login_required
 def list_location(request):
     immobiles = Immobile.objects.filter(is_locate=False)
     context = {'immobiles': immobiles}
-    print(context)
     return render(request, 'list-location.html', context)
 
 @login_required

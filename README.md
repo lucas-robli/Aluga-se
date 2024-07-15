@@ -18,3 +18,11 @@ Trabalhos Futuros:
     Criação de tela de Login;
     Permissões para visualizar e alterar;
     Melhorias no FrontEnd;
+
+Um pouco de como a aplicação ficou:
+
+<img src="/images-projeto/home.png">
+
+<img src="/images-projeto/report.png">
+
+<img src="/images-projeto/login.png">
